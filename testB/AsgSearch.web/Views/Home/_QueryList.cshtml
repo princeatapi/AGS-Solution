@@ -1,0 +1,78 @@
+﻿@model IEnumerable<AsgSearch.DAL.Query>
+
+<table class="table">
+    <thead>
+    <th>
+        Search Key
+    </th>
+    <th>
+        Date
+    </th>
+    <th>
+        Question
+    </th>
+    <th>
+        Date Created
+    </th>
+
+    <th>
+        Author
+    </th>
+    <th>
+        Tags
+    </th>
+    <th>
+        Avatar
+    </th>
+    <th>
+        Accepted Answer
+    </th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.QueryText
+                </td>
+                <td>
+                    @item.Time
+                </td>
+
+
+                @if (item.SearchResults.Count != 0)
+                {
+                    var firstItem = item.SearchResults.FirstOrDefault();
+
+                    <td>
+                        @firstItem.Title
+                    </td>
+                    <td></td>
+                    <td>
+                        @firstItem.OwnerName
+                    </td>
+                    <td>
+                        @firstItem.Tags
+
+                    </td>
+
+                    <td>
+                        <img src="@firstItem.Avatar" height="45" width="45" />
+                    </td>
+                    <td>
+                        @if (firstItem.AcceptedAnsId != null)
+                        {
+
+                            <p><a href="https://stackoverflow.com/a/@firstItem.AcceptedAnsId">@firstItem.AcceptedAnsId</a></p>
+                        }
+                        else
+                        {
+                            <p>No Answer</p>
+                        }
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>

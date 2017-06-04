@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StackExchange.StacMan.Question>
+
+
+<table class="table">
+    <thead>
+    <th>
+        Question
+    </th>
+    <th>
+        Date Created
+    </th>
+    <th>
+        Responses
+    </th>
+    <th>
+        Author
+    </th>
+    <th>
+        Tags
+    </th>
+    <th>
+        Avatar
+    </th>
+    <th>
+        Accepted Answer
+    </th>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.CreationDate
+                </td>
+                <td>
+                    @item.AnswerCount
+                </td>
+                <td>
+                    @item.Owner.DisplayName
+                </td>
+                <td>
+                    @if (item.Tags != null)
+                    {
+                        <p>@String.Join(",", item.Tags.Select(key => "'" + key + "'")).ToString();</p>
+                    }
+                </td>
+                <td>
+                    <img src="@item.Owner.ProfileImage" height="45" width="45" />
+                </td>
+                <td>
+                    @if (item.AcceptedAnswerId != null)
+                    {
+
+                        <p><a href="https://stackoverflow.com/a/@item.AcceptedAnswerId">@item.AcceptedAnswerId</a></p>
+                    }
+                    else
+                    {
+                        <p>No Answer</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
