@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AsgSearch.DAL;
+using StackExchange.StacMan;
 
 namespace AsgSearch.web.Classes
 {
@@ -17,18 +18,20 @@ namespace AsgSearch.web.Classes
 
         public List<Query> GetQueries()
         {
-            return context.Queries.All().ToList();
+            return context.Queries.All().OrderByDescending(key=>key.Time).Take(5).ToList();
         }
 
         // HINT: For step 2 you'll need to add a new parameter so you can set a value for the
         // QueryResults collection in Query
-        public Query SaveQuery(string queryText, DateTime time)
+        public Query SaveQuery(string queryText, DateTime time , ICollection<SearchResult> searchResults)
         {
             var q =
                 new Query()
                     {
                         QueryText = queryText,
-                        Time = time
+                        Time = time,
+                        SearchResults = searchResults
+
                     };
 
             context.Queries.Create(q);

@@ -7,7 +7,24 @@
     </li>
 </ul>
 
-<button>Refresh history</button>
 
 <p></p>
 <p></p>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        var url = '@Url.Action("ListQuery", "Home")'
+        $('#submit').click(function () {
+            $('#results').load(url);
+        });
+    });
+</script>
+
+
+<input id="submit" type="submit" value="Refresh" />
+
+<div id="results">
+    @{ Html.RenderAction("ListQuery", "Home");}
+</div>

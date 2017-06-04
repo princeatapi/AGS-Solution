@@ -13,7 +13,7 @@ namespace AsgSearch.DAL
 
         public Repository()
         {
-            Context = new DB();
+            Context = new DAL.DB();
         }
 
         public Repository(DB context)

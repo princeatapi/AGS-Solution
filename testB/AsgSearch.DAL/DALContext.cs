@@ -9,7 +9,7 @@ namespace AsgSearch.DAL
 
         public DALContext()
         {
-            dbContext = new DB();
+            dbContext = new DAL.DB();
         }
 
         public IQueryRepository Queries
@@ -19,8 +19,7 @@ namespace AsgSearch.DAL
 
         public int SaveChanges()
         {
-            // HINT: Implementation is a one-liner! :)
-            throw new NotImplementedException();
+            return dbContext.SaveChanges();
         }
 
         public void Dispose()
