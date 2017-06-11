@@ -11,20 +11,83 @@
 <p></p>
 <p></p>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
 
 
-    $(document).ready(function () {
-        var url = '@Url.Action("ListQuery", "Home")'
-        $('#submit').click(function () {
-            $('#results').load(url);
+        $(document).ready(function () {
+            var url = '@Url.Action("ListQuery", "Home")'
+            $('#submit').click(function () {
+                $('#results').load(url);
+            });
         });
-    });
-</script>
+    </script>
 
 
-<input id="submit" type="submit" value="Refresh" />
+    <input id="submit" type="submit" value="Refresh" />
 
-<div id="results">
-    @{ Html.RenderAction("ListQuery", "Home");}
+    <div id="results">
+        @{ Html.RenderAction("ListQuery", "Home");}
+    </div>*@
+
+
+<div ng-controller="StackSearch">
+    <input type="button" ng-click="refresh()" value="Refresh" />
+
+    <table class="table">
+
+        <thead>
+        <th>
+            Question
+        </th>
+        <th>
+            Date Created
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Tags
+        </th>
+        <th>
+            Avatar
+        </th>
+        <th>
+            Accepted Answer
+        </th>
+
+        </thead>
+        <tbody>
+            <tr ng-repeat="result in topSearches">
+                <td>
+                    {{result.QueryText}}
+                </td>
+                <td>
+                    {{result.Time}}
+                </td>
+                <td>
+                    {{result.SearchResults[0].Title}}
+                </td>
+                <td>
+                    {{result.SearchResults[0].OwnerName}}
+                </td>
+                <td>
+                    {{result.SearchResults[0].Tags}}
+                </td>
+                <td>
+                    <img src="{{result.SearchResults[0].Avatar}}" height="45" width="45"></img>
+                </td>
+                <td>
+                    <p ng-if="result.SearchResults[0].AcceptedAnsId">
+                        <a href="https://stackoverflow.com/a/{{result.SearchResults[0].AcceptedAnsId}}">{{result.SearchResults[0].AcceptedAnsId}}</a>
+                    </p>
+                    <p ng-if="!result.SearchResults[0].AcceptedAnsId">
+                        No Answer
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

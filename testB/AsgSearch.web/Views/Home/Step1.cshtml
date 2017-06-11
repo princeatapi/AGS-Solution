@@ -26,7 +26,7 @@
     </li>
 </ul>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
 
 
     $(document).ready(function () {
@@ -42,8 +42,73 @@
 
 
 @Html.TextBox("searchKey")
-<input id="submit" type ="submit" value="Search" />
+<input id="submit" type="submit" value="Search" />
 
-<div id="results"></div>
+<div id="results"></div>*@
+
+
+<div ng-controller="StackSearch">
+
+    <input type="text" value="{{searchKey}}" ng-model="searchKey" />
+    <input type="button" value="Search" ng-click="search()" />
+
+    <table class="table">
+
+        <thead>
+        <th>
+            Question
+        </th>
+        <th>
+            Date Created
+        </th>
+        <th>
+            Responses
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Tags
+        </th>
+        <th>
+            Avatar
+        </th>
+        <th>
+            Accepted Answer
+        </th>
+
+        </thead>
+        <tbody>
+            <tr ng-repeat="result in searchResults">
+                <td>
+                    {{result.Title}}
+                </td>
+                <td>
+                    {{result.DateCreated}}
+                </td>
+                <td>
+                    {{result.AnswerCount}}
+                </td>
+                <td>
+                    {{result.OwnerName}}
+                </td>
+                <td>
+                    {{result.Tags}}
+                </td>
+                <td>
+                    <img src="{{result.Avatar}}" height="45" width="45"></img>
+                </td>
+                <td>
+                    <p ng-if="result.AcceptedAnsId">
+                        <a href="https://stackoverflow.com/a/{{result.AcceptedAnsId}}">{{result.AcceptedAnsId}}</a>
+                    </p>
+                    <p ng-if="!result.AcceptedAnsId">
+                        No Answer
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
