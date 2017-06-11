@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AsgQuizzes.Core;
+using Newtonsoft.Json;
 
 namespace AsgQuizzes
 {
@@ -52,7 +53,7 @@ namespace AsgQuizzes
 
         public Exam GetExamFromString(string examStr)
         {
-            throw new NotImplementedException();
+            return JsonConvert.DeserializeObject<Exam>(examStr);
         }
 
         public string GenerateBoard(string strInput)
