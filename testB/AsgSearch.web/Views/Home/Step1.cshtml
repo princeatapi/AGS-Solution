@@ -26,33 +26,12 @@
     </li>
 </ul>
 
-@*<script type="text/javascript">
-
-
-    $(document).ready(function () {
-        var url = '@Url.Action("Search","Home")';
-
-        $('#submit').click(function () {
-            var keyword = $('#searchKey').val();
-            $('#results').load(url, { searchKey: keyword });
-        });
-    });
-</script>
-
-
-
-@Html.TextBox("searchKey")
-<input id="submit" type="submit" value="Search" />
-
-<div id="results"></div>*@
-
-
 <div ng-controller="StackSearch">
 
     <input type="text" value="{{searchKey}}" ng-model="searchKey" />
     <input type="button" value="Search" ng-click="search()" />
 
-    <table class="table">
+    <table class="table" ng-if="searchResults.length > 1">
 
         <thead>
         <th>

@@ -172,7 +172,6 @@
     <Compile Include="Classes\MyUnityControllerFactory.cs" />
     <Compile Include="Classes\QueryService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PastSearchesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
